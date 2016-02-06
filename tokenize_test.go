@@ -126,3 +126,49 @@ func TestNGram(t *testing.T) {
 		})
 	})
 }
+
+func TestWordNGram(t *testing.T) {
+	Convey("Given WordNGram function", t, func() {
+		Convey("when n is too small", func() {
+			Convey("it should return an empty array with n = 0", func() {
+				ns := WordNGram(0, []string{"a", "b", "c"}, " ")
+				So(len(ns), ShouldEqual, 0)
+			})
+
+			Convey("it should return an empty array with n < 0", func() {
+				ns := WordNGram(-1, []string{"a", "b", "c"}, " ")
+				So(len(ns), ShouldEqual, 0)
+			})
+		})
+
+		Convey("when n is 1", func() {
+			Convey("it should work correctly", func() {
+				ns := WordNGram(1, []string{"a", "b", "c"}, " ")
+				So(len(ns), ShouldEqual, 3)
+				So(ns[0], ShouldEqual, "a")
+				So(ns[1], ShouldEqual, "b")
+				So(ns[2], ShouldEqual, "c")
+			})
+		})
+
+		Convey("when n is 2", func() {
+			Convey("it should work correctly", func() {
+				ns := WordNGram(2, []string{"a", "b", "c", "d"}, " ")
+				So(len(ns), ShouldEqual, 3)
+				So(ns[0], ShouldEqual, "a b")
+				So(ns[1], ShouldEqual, "b c")
+				So(ns[2], ShouldEqual, "c d")
+			})
+		})
+
+		Convey("when n is 3", func() {
+			Convey("it should work correctly", func() {
+				ns := WordNGram(3, []string{"a", "b", "c", "d", "e"}, " ")
+				So(len(ns), ShouldEqual, 3)
+				So(ns[0], ShouldEqual, "a b c")
+				So(ns[1], ShouldEqual, "b c d")
+				So(ns[2], ShouldEqual, "c d e")
+			})
+		})
+	})
+}

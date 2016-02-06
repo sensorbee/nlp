@@ -1,5 +1,9 @@
 package nlp
 
+import (
+	"strings"
+)
+
 // NGram returns UTF-8 character n-grams created from the given text. This
 // function assumes that s only contains valid UTF-8 letters. It returns an
 // empty array when n isn't greater than 0.
@@ -32,4 +36,21 @@ func NGram(n int, s string) []string {
 
 	res[r] = s[idx[k]:]
 	return res[:r+1]
+}
+
+// WordNGram creates word n-grams from the given array of words. A separator
+// sep can be any string.It returns an empty array when n isn't greater than 0.
+func WordNGram(n int, words []string, sep string) []string {
+	if n <= 0 {
+		return []string{}
+	}
+	if len(words) <= n {
+		return []string{strings.Join(words, sep)}
+	}
+
+	res := make([]string, len(words)-n+1)
+	for i := 0; i <= len(words)-n; i++ {
+		res[i] = strings.Join(words[i:i+n], sep)
+	}
+	return res
 }
