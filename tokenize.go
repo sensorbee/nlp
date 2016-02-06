@@ -7,8 +7,12 @@ func NGram(n int, s string) []string {
 	if n <= 0 {
 		return []string{}
 	}
+	resLen := len(s) - n + 1
+	if resLen <= 0 { // Too short
+		return []string{s}
+	}
 
-	res := make([]string, len(s)-n+1) // This may be too much
+	res := make([]string, resLen) // This may be too long due to UTF-8.
 	r := 0
 
 	idx := make([]int, n)
@@ -22,6 +26,10 @@ func NGram(n int, s string) []string {
 		idx[k] = i
 		k = (k + 1) % n
 	}
+	if r == 0 { // Because s contains UTF-8, len(s) > n and r == 0 could be true.
+		return []string{s}
+	}
+
 	res[r] = s[idx[k]:]
 	return res[:r+1]
 }

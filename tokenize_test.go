@@ -48,6 +48,12 @@ func TestNGram(t *testing.T) {
 		})
 
 		Convey("When n is 2", func() {
+			Convey("it should accept a string having 1 letter", func() {
+				ns := NGram(2, "a")
+				So(len(ns), ShouldEqual, 1)
+				So(ns[0], ShouldEqual, "a")
+			})
+
 			Convey("it should tokenize 2 ascii letters", func() {
 				ns := NGram(2, "ab")
 				So(len(ns), ShouldEqual, 1)
@@ -78,6 +84,18 @@ func TestNGram(t *testing.T) {
 		})
 
 		Convey("When n is 3", func() {
+			Convey("it should accept a string having 1 letter", func() {
+				ns := NGram(3, "a")
+				So(len(ns), ShouldEqual, 1)
+				So(ns[0], ShouldEqual, "a")
+			})
+
+			Convey("it should accept a string having 2 letters", func() {
+				ns := NGram(3, "ab")
+				So(len(ns), ShouldEqual, 1)
+				So(ns[0], ShouldEqual, "ab")
+			})
+
 			Convey("it should tokenize 3 ascii letters", func() {
 				ns := NGram(3, "abc")
 				So(len(ns), ShouldEqual, 1)
