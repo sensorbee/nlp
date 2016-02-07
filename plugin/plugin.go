@@ -21,4 +21,9 @@ func init() {
 		udf.MustConvertGeneric(nlp.WeightBinary))
 	udf.MustRegisterGlobalUDF("nlp_weight_log_tf",
 		udf.MustConvertGeneric(nlp.WeightBinary))
+
+	udf.MustRegisterGlobalUDF("nlp_to_lower",
+		udf.MustConvertGeneric(strings.ToLower))
+	udf.MustRegisterGlobalUDF("nlp_to_upper",
+		udf.MustConvertGeneric(strings.ToUpper))
 }
