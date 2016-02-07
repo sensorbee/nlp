@@ -2,6 +2,7 @@ package nlp
 
 import (
 	. "github.com/smartystreets/goconvey/convey"
+	"math"
 	"testing"
 )
 
@@ -36,6 +37,21 @@ func TestWeightTF(t *testing.T) {
 				So(w["b"], ShouldEqual, 1)
 				So(w["c"], ShouldEqual, 1)
 				So(w["d"], ShouldEqual, 1)
+			})
+		})
+
+		Convey("when applying WeightLogTF", func() {
+			w := WeightLogTF(words)
+
+			Convey("it should have a correct lenght", func() {
+				So(len(w), ShouldEqual, 4)
+			})
+
+			Convey("it should have correct counts", func() {
+				So(w["a"], ShouldEqual, math.Log(1+4))
+				So(w["b"], ShouldEqual, math.Log(1+2))
+				So(w["c"], ShouldEqual, math.Log(1+1))
+				So(w["d"], ShouldEqual, math.Log(2+1))
 			})
 		})
 	})
