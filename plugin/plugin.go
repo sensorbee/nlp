@@ -14,4 +14,7 @@ func init() {
 	udf.MustRegisterGlobalUDF("nlp_split", udf.MustConvertGeneric(strings.Split))
 	udf.MustRegisterGlobalUDF("nlp_remove_empty_word",
 		udf.MustConvertGeneric(nlp.RemoveEmptyWord))
+
+	udf.MustRegisterGlobalUDF("nlp_weight_tf",
+		udf.MustConvertGeneric(nlp.WeightTF))
 }
