@@ -172,3 +172,48 @@ func TestWordNGram(t *testing.T) {
 		})
 	})
 }
+
+func TestRemoveEmptyWord(t *testing.T) {
+	Convey("Given RemoveEmptyWord function", t, func() {
+		Convey("when applying an empty array", func() {
+			Convey("it should return an empty array", func() {
+				So(RemoveEmptyWord([]string{}), ShouldBeEmpty)
+			})
+		})
+
+		Convey("when applying an array without an empty word", func() {
+			Convey("it should return a non empty array for one word array", func() {
+				a := RemoveEmptyWord([]string{"a"})
+				So(len(a), ShouldEqual, 1)
+				So(a[0], ShouldEqual, "a")
+			})
+
+			Convey("it should return a nonempty array for some words", func() {
+				a := RemoveEmptyWord([]string{"a", "b", "c"})
+				So(len(a), ShouldEqual, 3)
+				So(a[0], ShouldEqual, "a")
+				So(a[1], ShouldEqual, "b")
+				So(a[2], ShouldEqual, "c")
+			})
+		})
+
+		Convey("when applying an array having some empty words", func() {
+			Convey("it should only return non-empty words", func() {
+				a := RemoveEmptyWord([]string{"", "a", "", "", "b", "", ""})
+				So(len(a), ShouldEqual, 2)
+				So(a[0], ShouldEqual, "a")
+				So(a[1], ShouldEqual, "b")
+			})
+		})
+
+		Convey("when applying an array only having empty words", func() {
+			Convey("it should return an empty array for one empty word", func() {
+				So(RemoveEmptyWord([]string{""}), ShouldBeEmpty)
+			})
+
+			Convey("it should return an empty array for multiple empty words", func() {
+				So(RemoveEmptyWord([]string{"", "", "", ""}), ShouldBeEmpty)
+			})
+		})
+	})
+}

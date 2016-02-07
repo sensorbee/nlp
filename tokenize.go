@@ -24,6 +24,8 @@ func NGram(n int, s string) []string {
 	k := 0
 	for i := range s {
 		if idx[n-1] >= 0 {
+			// This function intentionally avoid using append because it's
+			// slower than the direct assignment.
 			res[r] = s[idx[k]:i]
 			r++
 		}
@@ -53,4 +55,17 @@ func WordNGram(n int, words []string, sep string) []string {
 		res[i] = strings.Join(words[i:i+n], sep)
 	}
 	return res
+}
+
+// RemoveEmptyWord removes an empty string from an array of strings.
+func RemoveEmptyWord(a []string) []string {
+	i := 0
+	res := make([]string, len(a))
+	for _, s := range a {
+		if len(s) != 0 {
+			res[i] = s
+			i++
+		}
+	}
+	return res[:i]
 }
