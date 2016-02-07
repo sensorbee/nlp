@@ -19,3 +19,16 @@ func WeightTF(a []string) data.Map {
 	}
 	return res
 }
+
+// WeightBinary creates a map having weights of each word. The weight is 1 if
+// there's at least one word, or 0 otherwise. Because feature vectors created
+// by this function is sparse, all values in resulting maps are 1. In other
+// words, instead of having 0 as a value, a key doesn't exist for a word that
+// is not in the given array.
+func WeightBinary(a []string) data.Map {
+	res := data.Map{}
+	for _, s := range a {
+		res[s] = data.Float(1)
+	}
+	return res
+}
