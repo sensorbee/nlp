@@ -2,7 +2,7 @@ package plugin
 
 import (
 	"github.com/sensorbee/nlp"
-	"pfi/sensorbee/sensorbee/bql/udf"
+	"gopkg.in/sensorbee/sensorbee.v0/bql/udf"
 	"strings"
 )
 

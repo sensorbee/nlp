@@ -1,8 +1,8 @@
 package nlp
 
 import (
+	"gopkg.in/sensorbee/sensorbee.v0/data"
 	"math"
-	"pfi/sensorbee/sensorbee/data"
 )
 
 // WeightTF creates a map having a word as a key and its count (i.e. tf) as
